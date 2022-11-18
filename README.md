@@ -1,4 +1,4 @@
-O objetivo dessa API deveria possibilitar a leitura da lista de indicados e vencedores da categoria Pior Filme do Golden Raspberry Awards.
+O objetivo dessa API deve possibilitar a leitura da lista de indicados e vencedores da categoria Pior Filme do Golden Raspberry Awards.
 
 Requisitos do sistema.
 Ler o arquivo CSV dos filmes e inserir os dados em uma base de dados ao iniciar a
