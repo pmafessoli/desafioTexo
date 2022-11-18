@@ -10,4 +10,4 @@ Java 8 juntamente com spring boot com algumas dependencias: Spring Web, Spring J
 
 web service RESTful implementado com base no nível 2 de maturidade de Richardson;
 
-O retorno dos dados deve ocorrer em jormato json através de requisições HTTP.
+O retorno dos dados deve ocorrer em formato json através de requisições HTTP.
