@@ -25,8 +25,8 @@ public class StudioEntity {
 		return NAME;
 	}
 
-	public void setNAME(String nAME) {
-		NAME = nAME;
+	public void setNAME(String name) {
+		NAME = name;
 	}
 
 	public StudioEntity() {

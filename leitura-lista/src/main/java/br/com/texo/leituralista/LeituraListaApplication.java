@@ -19,6 +19,7 @@ public class LeituraListaApplication {
 		SpringApplication.run(LeituraListaApplication.class, args);
 		// Loading CSV file to H2 Memory DataBase
 		CSVToDataBaseH2 loadFile = new CSVToDataBaseH2();
+
 	}
 
 	@Bean

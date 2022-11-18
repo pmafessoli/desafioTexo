@@ -33,8 +33,9 @@ import br.com.texo.leituralista.entity.MovieEntity;
 import br.com.texo.leituralista.messages.BadRequestMessage;
 import br.com.texo.leituralista.messages.ForbiddenMessage;
 import br.com.texo.leituralista.messages.MethodNotAllowedMessage;
+import br.com.texo.leituralista.messages.NotFoundMessage;
 import br.com.texo.leituralista.models.AwardsIntervalModel;
-import br.com.texo.leituralista.models.ReturnStatusModel;
+import br.com.texo.leituralista.models.StatusModel;
 import br.com.texo.leituralista.models.StudiosModel;
 import br.com.texo.leituralista.repository.AwardsIntervalRepository;
 import br.com.texo.leituralista.repository.MovieRepository;
@@ -88,7 +89,7 @@ public class AppController {
 		System.out.println("Ano: " + year);
 
 		List<MovieEntity> data = movieRepository.findMoviesByYear(year);
-		MovieDTO moviesData = new MovieDTO();
+		MovieDTO moviesData = new MovieDTO(year);
 		moviesData.setMovies(data);
 		return moviesData;
 	}
@@ -152,7 +153,7 @@ public class AppController {
 
 	@RequestMapping(value = "/movies/awardsinterval")
 	public AwardsIntervalDTO listForAwardsInterval(HttpServletRequest request)
-			throws MethodNotAllowedException {
+			throws MethodNotAllowedMessage {
 
 		String strMethod = "GET";
 		System.out.println("Method: " + request.getMethod());
@@ -199,9 +200,9 @@ public class AppController {
 	}
 
 	@RequestMapping(value = "/movies/{id}", produces = "application/json")
-	public ResponseEntity<ReturnStatusModel> deleteMovie(HttpServletRequest request, @PathVariable("id") String id,
+	public ResponseEntity<StatusModel> deleteMovie(HttpServletRequest request, @PathVariable("id") String id,
 			final HttpServletResponse response)
-			throws ForbiddenMessage, NotFoundException, MethodNotAllowedMessage, JsonProcessingException,
+			throws ForbiddenMessage, NotFoundException, MethodNotAllowedException, JsonProcessingException,
 			BadRequestMessage {
 
 		String strMethod = "DELETE";
@@ -218,11 +219,11 @@ public class AppController {
 			throw new BadRequestMessage("");
 		}
 
-		ReturnStatusModel returnStatus = new ReturnStatusModel("00201", request.getRequestURL().toString());
-		MovieEntity movie = movieRepository.findOne(idPar);
+		StatusModel returnStatus = new StatusModel("00201", request.getRequestURL().toString());
+		MovieEntity movie = movieRepository(idPar);
 
 		if (movie == null) {
-			throw new NotFoundException();
+			throw new NotFoundMessage("");
 		} else {
 			System.out.println("Vencedor: " + movie.getWinner());
 			if (movie.getWinner()) {
@@ -232,6 +233,10 @@ public class AppController {
 			}
 		}
 		return new ResponseEntity<>(returnStatus, HttpStatus.OK);
+	}
+
+	private MovieEntity movieRepository(Long idPar) {
+		return null;
 	}
 
 }

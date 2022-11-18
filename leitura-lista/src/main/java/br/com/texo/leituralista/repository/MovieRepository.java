@@ -17,5 +17,4 @@ public interface MovieRepository extends CrudRepository<MovieEntity, Long> {
 	@Query(value = "SELECT  year,  SUM(CASE WHEN winner=true THEN 1 ELSE 0 END) AS Wins FROM movies GROUP BY year HAVING WINS>1", nativeQuery = true)
 	List<AwardsIntervalModel> moviesWinnersMoreOneYear();
 
-	MovieEntity findOne(Long idPar);
 }

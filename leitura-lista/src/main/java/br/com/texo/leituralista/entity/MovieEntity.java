@@ -10,7 +10,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
+import org.springframework.stereotype.Component;
+
 @Entity(name = "MOVIES")
+@Component
 public class MovieEntity {
 
 	@Id
